@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>国土局行政审批业务</title>
+    </h:head>
+    <h:body onload="#{guotuAppDetailController.assignSelected()}">
+        <p:layout fullPage="true">
+            <p:layoutUnit position="center">
+                <center>
+                    <h1>国土局-农民个人占集体土地建房行政申请审批办理</h1>
+                    <h:form>
+                        <p:panel>
+                            <p:panelGrid columns="2">
+                                <p:outputLabel value="申请人" for="grid1"/>
+                                <p:panelGrid id="grid1" columns="4" style="width:600px;">
+                                    <p:outputLabel for="iName1" value="姓名"/>
+                                    <p:outputLabel id="iName1" value="#{guotuAppDetailController.selected.applicantName}"/>
+                                    <p:outputLabel for="iAge" value="年龄"/>
+                                    <p:outputLabel id="iAge" value="#{guotuAppDetailController.selected.age}"/>
+                                    <p:outputLabel for="iSex" value="性别"/>
+                                    <p:outputLabel id="iSex" value="#{guotuAppDetailController.selected.sex}"/>                                
+                                    <p:outputLabel for="iHukou" value="家庭户口"/>
+                                    <p:outputLabel id="iHukou" value="#{guotuAppDetailController.selected.household}"/>
+                                    <p:outputLabel for="iAddr" value="住址"/>
+                                    <p:outputLabel id="iAddr" value="#{guotuAppDetailController.selected.address}"/>
+                                    <p:outputLabel for="iPhone" value="联系电话"/>
+                                    <p:outputLabel id="iPhone" value="#{guotuAppDetailController.selected.phone}"/>
+                                </p:panelGrid> 
+                                <p:outputLabel for="shenQingFile" value="建房用地申请书扫描件"/> 
+                                <p:graphicImage id="shenQingFile" value="#{guotuAppDetailController.shenQingImageFile}" cache="false"/>
+                                <p:outputLabel for="shenPiFile" value="建房用地审批呈报表扫描件" /> 
+                                <p:graphicImage id="shenPiFile" value="#{guotuAppDetailController.shenPiImageFile}" cache="false"/>
+                                <p:outputLabel for="songYueFile" value="建房用地送阅审批件扫描件" /> 
+                                <p:graphicImage id="songYueFile" value="#{guotuAppDetailController.songYueImageFile}" cache="false"/>
+                                <p:outputLabel for="shenChaFile" value="建房用地审查意见表扫描件"/> 
+                                <p:graphicImage id="shenChaFile" value="#{guotuAppDetailController.shenChaImageFile}" cache="false"/>
+                                <p:outputLabel for="qiTaSuoXuFile" value="其他所需文件扫描件"/> 
+                                <p:graphicImage id="qiTaSuoXuFile" value="#{guotuAppDetailController.qiTaImageFile}" cache="false"/>
+                                <p:outputLabel for="iC" value="村委会意见"/>
+                                <p:inputTextarea id="iC" style="width:600px;" value="#{guotuAppDetailController.selected.villageOpinion}" disabled="#{guotuAppDetailController.forVilliageAgentToEdit()}" />
+                                <p:outputLabel for="iX" value="乡镇审核意见"/>
+                                <p:inputTextarea id="iX" style="width:600px; " value="#{guotuAppDetailController.selected.townOpinion}" disabled="#{guotuAppDetailController.forTownOfficerToEdit()}"/>
+                                <p:outputLabel for="iXi" value="国土局意见"/>
+                                <p:inputTextarea id="iXi" style="width:600px;" value="#{guotuAppDetailController.selected.bureauOpinion}" disabled="#{guotuAppDetailController.forBureauClerkToEdit()}"
+                                                 valueChangeListener="#{guotuAppDetailController.optionChanged}" />                               
+                            </p:panelGrid>
+                        </p:panel> 
+                        <p:commandButton value="暂时不做审批" action="#{guotuAppDetailController.returnToWorkflowPage}"/>                                      
+                        <p:commandButton value="退回村委修订" action="#{guotuAppDetailController.bureauReturnAppToVilliage}"/>
+                        <p:commandButton value="局里审批通过" action="#{guotuAppDetailController.bureauApproved}"/>
+                        <p:commandButton value="局里审批未过" action="#{guotuAppDetailController.bureauDisapproveReturnToVillage}"/>
+                    </h:form>
+                </center>
+            </p:layoutUnit>
+        </p:layout>
+    </h:body>
+</html>
+

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>国土局行政审批业务</title>
+    </h:head>
+    <h:body onload="#{guotuAppDetailController.prepareCreate()}">
+        <p:layout fullPage="true" >
+            <p:layoutUnit position="center">
+                <h1 align="center">农民个人占集体土地建房行政申请表</h1>  
+                <h:form enctype= "multipart/form-data">
+                    <div align="center">
+                        <p:panel>
+                            <p:panelGrid columns="2">
+                                <p:outputLabel value="申请人概况" for="grid1"/>
+                                <p:panelGrid id="grid1" columns="4" style="width:600px;">
+                                    <p:outputLabel for="iName" value="姓名"/>
+                                    <p:inputText id="iName" value="#{guotuAppDetailController.selected.applicantName}" required="true"  />
+                                    <p:outputLabel for="iAge" value="年龄"/>
+                                    <p:inputText id="iAge" value="#{guotuAppDetailController.selected.age}" required="true" />
+                                    <p:outputLabel for="iSex" value="性别"/>
+                                    <p:selectOneMenu id="iSex" value="#{guotuAppDetailController.selected.sex}" >
+                                        <f:selectItem itemLabel="男" itemValue="男" />
+                                        <f:selectItem itemLabel="女" itemValue="女" />
+                                    </p:selectOneMenu>
+                                    <p:outputLabel for="iHukou" value="家庭户口"/>
+                                    <p:selectOneMenu id="iHukou" value="#{guotuAppDetailController.selected.household}" >
+                                        <f:selectItem itemLabel="农业" itemValue="农业" />
+                                        <f:selectItem itemLabel="非农业" itemValue="非农业" />
+                                    </p:selectOneMenu>
+                                    <p:outputLabel for="iAddr" value="住址"/>
+                                    <p:inputText id="iAddr" value="#{guotuAppDetailController.selected.address}" required="true"  />
+                                    <p:outputLabel for="iPhone" value="联系电话"/>
+                                    <p:inputText id="iPhone" value="#{guotuAppDetailController.selected.phone}"  />
+                                </p:panelGrid>
+                                <p:outputLabel value="选择建房用地申请表"/>
+                                <h:inputFile value="#{guotuAppDetailController.shenQing_File}"  maxlength="80" requiredMessage="必须选择建房用地申请书扫描件" size="50" required="true"/>
+                                <p:outputLabel value="选择建房用地审批呈报表"/>
+                                <h:inputFile value="#{guotuAppDetailController.shenPi_File}"  maxlength="80" requiredMessage="必须选择建房用地审批呈报表扫描件" size="50" required="true"/>
+                                <p:outputLabel value="选择建房用地送阅审批表"/>
+                                <h:inputFile value="#{guotuAppDetailController.songYue_File}"  maxlength="80" requiredMessage="必须选择建房用地送阅审批件扫描件" size="50" required="true"/>
+                                <p:outputLabel value="选择建房用地审查意见表"/>
+                                <h:inputFile value="#{guotuAppDetailController.shenCha_File}"  maxlength="80" requiredMessage="必须选择建房用地审查意见表扫描件" size="50" required="true"/>
+                                <p:outputLabel value="选择其它所需文件"/>
+                                <h:inputFile value="#{guotuAppDetailController.qiTa_File}"  maxlength="80" requiredMessage="必须选择其它所需文件扫描件" size="50" required="true"/>
+                            </p:panelGrid>
+                            <p:commandButton value="保存申请资料" action="#{guotuAppDetailController.uploadFilesSaveApplication}" ajax="false" />
+                            <p:commandButton value="放弃申请资料" action="/appAbstract/V_List" ajax="false" />
+                       </p:panel>
+                    </div>
+                </h:form>
+            </p:layoutUnit>
+        </p:layout>
+    </h:body>
+</html>
+

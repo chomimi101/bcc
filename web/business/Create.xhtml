@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="BusinessCreateDlg" widgetVar="BusinessCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateBusinessTitle}">
+            <h:form id="BusinessCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{businessController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateBusinessLabel_businessId}" for="businessId" />
+                        <p:inputText id="businessId" value="#{businessController.selected.businessId}" title="#{bundle.CreateBusinessTitle_businessId}" required="true" requiredMessage="#{bundle.CreateBusinessRequiredMessage_businessId}"/>
+                        <p:outputLabel value="#{bundle.CreateBusinessLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{businessController.selected.name}" title="#{bundle.CreateBusinessTitle_name}" required="true" requiredMessage="#{bundle.CreateBusinessRequiredMessage_name}"/>
+                        <p:outputLabel value="#{bundle.CreateBusinessLabel_editAppUrl}" for="editAppUrl" />
+                        <p:inputText id="editAppUrl" value="#{businessController.selected.editAppUrl}" title="#{bundle.CreateBusinessTitle_editAppUrl}" required="true" requiredMessage="#{bundle.CreateBusinessRequiredMessage_editAppUrl}"/>
+                        <p:outputLabel value="#{bundle.CreateBusinessLabel_dispAppUrl}" for="dispAppUrl" />
+                        <p:inputText id="dispAppUrl" value="#{businessController.selected.dispAppUrl}" title="#{bundle.CreateBusinessTitle_dispAppUrl}" />
+                        <p:outputLabel value="#{bundle.CreateBusinessLabel_countyBureauId}" for="countyBureauId" />
+                        <p:selectOneMenu id="countyBureauId" value="#{businessController.selected.countyBureauId}" required="true" requiredMessage="#{bundle.EditBusinessRequiredMessage_countyBureauId}">
+                            <f:selectItems value="#{countyBureauController.itemsAvailableSelectOne}"
+                                           var="countyBureauIdItem"
+                                           itemValue="#{countyBureauIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{businessController.create}" value="#{bundle.Save}" update="display,:BusinessListForm:datalist,:growl" oncomplete="handleSubmit(args,'BusinessCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="BusinessCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
